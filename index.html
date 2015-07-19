@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Codeigniter-model by JCSama</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/JCSama/CodeIgniter-Model">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/JCSama/CodeIgniter-Model/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/JCSama/CodeIgniter-Model/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Codeigniter-model</h1>
+          <p>CodeIgniter Model is an extended class for CI_Model, it allows you to manipulate CRUD operations in an easy way. It support multilang and relations between tables.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/JCSama">JCSama</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="codeigniter-model-class" class="anchor" href="#codeigniter-model-class" aria-hidden="true"><span class="octicon octicon-link"></span></a>CodeIgniter Model Class</h1>
+
+<p>CodeIgniter Model is an extended class for CI_Model, it allows you to manipulate CRUD operations in an easy way.
+It support multilang and relations between tables.</p>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<p>CodeIgniter Versoin &gt;= 2.x.x</p>
+
+<p>Copy the file <code>MY_Model.php</code> to the <code>application/core/</code> folder.</p>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>Create a Model that extends from MY_Model and set the variables :</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"><span class="pl-k">protected</span> <span class="pl-smi">$table</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>my_table<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">protected</span> <span class="pl-smi">$identifier</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>id_my_table<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">protected</span> <span class="pl-smi">$foreign_key</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>my_table_id<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">protected</span> <span class="pl-smi">$fields</span> <span class="pl-k">=</span> <span class="pl-c1">array</span>(</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>field_1<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>field_2<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">);</span></pre></div>
+
+<h1>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h1>
+
+<p>Assuming that we have 2 tables advertisement and category, each advertisement belongs to a category, so a category can have
+one or many advertisements, which means our tables may look like this :</p>
+
+<p>NOTES :</p>
+
+<ul>
+<li>The category table has multilang fields so we're gonna put them in category_lang table</li>
+<li>
+<p>{table}_lang must respect the recommended structure</p>
+
+<hr>
+
+<table>
+<thead>
+<tr>
+<th>category</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id_category (int)</td>
+</tr>
+<tr>
+<td>parent (int)</td>
+</tr>
+<tr>
+<td>created_at (datetime)</td>
+</tr>
+<tr>
+<td>updated_at (datetime)</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<hr>
+
+<table>
+<thead>
+<tr>
+<th>category_lang</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category_id (int)</td>
+</tr>
+<tr>
+<td>lang_id (int)</td>
+</tr>
+<tr>
+<td>title (varchar)</td>
+</tr>
+<tr>
+<td>description (varchar)</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<hr>
+
+<table>
+<thead>
+<tr>
+<th>advert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id_advert (int)</td>
+</tr>
+<tr>
+<td>category_id (int)</td>
+</tr>
+<tr>
+<td>title (int)</td>
+</tr>
+<tr>
+<td>description (int)</td>
+</tr>
+<tr>
+<td>deleted (tinyInt)</td>
+</tr>
+<tr>
+<td>created_at (datetime)</td>
+</tr>
+<tr>
+<td>updated_at (datetime)</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+</li>
+</ul>
+
+<h2>
+<a id="fetch-records" class="anchor" href="#fetch-records" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fetch records</h2>
+
+<p>After that, you can call the Model within your controller for instance like following :</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"><span class="pl-c">// Return all records</span></span>
+<span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">load</span><span class="pl-k">-&gt;</span>model(<span class="pl-s"><span class="pl-pds">'</span>New_model<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$records</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">New_model</span><span class="pl-k">-&gt;</span>get_all();</span>
+<span class="pl-s1"><span class="pl-c1">var_dump</span>(<span class="pl-smi">$records</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Return record with id=10</span></span>
+<span class="pl-s1"><span class="pl-smi">$record</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">New_model</span><span class="pl-k">-&gt;</span>get(<span class="pl-c1">10</span>);</span>
+<span class="pl-s1"><span class="pl-c1">var_dump</span>(<span class="pl-smi">$record</span>);</span>
+<span class="pl-s1"><span class="pl-s"><span class="pl-pds">`</span><span class="pl-pds">`</span></span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">## Fetch records with criteria</span></span>
+<span class="pl-s1"><span class="pl-s"><span class="pl-pds">`</span><span class="pl-pds">`</span><span class="pl-pds">`</span>php</span></span>
+<span class="pl-s1"><span class="pl-s">// You can also add some criteria like following :</span></span>
+<span class="pl-s1"><span class="pl-s"><span class="pl-smi">$criteria</span> = array();</span></span>
+<span class="pl-s1"><span class="pl-s"><span class="pl-smi">$criteria</span>[] = array('title', 'like', 'test');</span></span>
+<span class="pl-s1"><span class="pl-s"><span class="pl-smi">$criteria</span>[] = array('id_my_table', '=', 10);</span></span>
+<span class="pl-s1"><span class="pl-s"></span></span>
+<span class="pl-s1"><span class="pl-s"><span class="pl-smi">$result</span> = <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">New_model</span>-&gt;get_all(<span class="pl-smi">$criteria</span>);</span></span>
+<span class="pl-s1"><span class="pl-s"></span></span>
+<span class="pl-s1"><span class="pl-s">var_dump(<span class="pl-smi">$result</span>);</span></span></pre></div>
+
+<h2>
+<a id="fetch-record-with-association" class="anchor" href="#fetch-record-with-association" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fetch record with association</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"><span class="pl-smi">$result</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">Advert_model</span></span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>with(<span class="pl-s"><span class="pl-pds">'</span>category<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>order_by(<span class="pl-s"><span class="pl-pds">'</span>created_at<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>DESC<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>get_all(<span class="pl-smi">$criteria</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">var_dump</span>(<span class="pl-smi">$result</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$result</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">Category_model</span></span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>with(<span class="pl-s"><span class="pl-pds">'</span>advert<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>get_all();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">var_dump</span>(<span class="pl-smi">$result</span>);</span></pre></div>
+
+<h2>
+<a id="fetch-records-with-multiple-associations" class="anchor" href="#fetch-records-with-multiple-associations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fetch records with multiple associations</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"><span class="pl-smi">$result</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">Advert_model</span></span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>with(<span class="pl-s"><span class="pl-pds">'</span>category<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>with(<span class="pl-s"><span class="pl-pds">'</span>alias_2<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>with(<span class="pl-s"><span class="pl-pds">'</span>alias_3<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>order_by(<span class="pl-s"><span class="pl-pds">'</span>created_at<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>DESC<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>get_all(<span class="pl-smi">$criteria</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">var_dump</span>(<span class="pl-smi">$result</span>);</span></pre></div>
+
+<h2>
+<a id="fetch-records-with-filter-on-the-associations" class="anchor" href="#fetch-records-with-filter-on-the-associations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fetch records with filter on the associations</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"><span class="pl-smi">$filter</span> <span class="pl-k">=</span> <span class="pl-c1">array</span>();</span>
+<span class="pl-s1"><span class="pl-smi">$filter</span>[] <span class="pl-k">=</span> <span class="pl-c1">array</span>(<span class="pl-s"><span class="pl-pds">'</span>lang_id<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>=<span class="pl-pds">'</span></span>, <span class="pl-c1">2</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$result</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">Advert_model</span></span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>with(<span class="pl-s"><span class="pl-pds">'</span>category<span class="pl-pds">'</span></span>, <span class="pl-smi">$filter</span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>with(<span class="pl-s"><span class="pl-pds">'</span>alias_2<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>with(<span class="pl-s"><span class="pl-pds">'</span>alias_3<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>order_by(<span class="pl-s"><span class="pl-pds">'</span>created_at<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>DESC<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>get_all(<span class="pl-smi">$criteria</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c1">var_dump</span>(<span class="pl-smi">$result</span>);</span></pre></div>
+
+<h2>
+<a id="fetch-records-with-pagination" class="anchor" href="#fetch-records-with-pagination" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fetch records with pagination</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"><span class="pl-smi">$page</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$total_items_per_page</span> <span class="pl-k">=</span> <span class="pl-c1">100</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$records</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">Advert_model</span></span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>limit(<span class="pl-smi">$total_items_per_page</span>, <span class="pl-smi">$page</span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>order_by(<span class="pl-s"><span class="pl-pds">'</span>created_at<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>DESC<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">                <span class="pl-k">-&gt;</span>get_all(<span class="pl-smi">$criteria</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$total_records</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">Advert_model</span><span class="pl-k">-&gt;</span>count_all_results();</span>
+<span class="pl-s1"><span class="pl-c1">var_dump</span>(<span class="pl-smi">$records</span>);</span></pre></div>
+
+<h2>
+<a id="add-new-record" class="anchor" href="#add-new-record" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add new record</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"><span class="pl-smi">$data</span> <span class="pl-k">=</span> <span class="pl-c1">array</span>(</span>
+<span class="pl-s1">  <span class="pl-s"><span class="pl-pds">'</span>title<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>New Advertisement<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">  <span class="pl-s"><span class="pl-pds">'</span>description<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>New Advertisement<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">  <span class="pl-s"><span class="pl-pds">'</span>deleted<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">0</span>,</span>
+<span class="pl-s1">  <span class="pl-s"><span class="pl-pds">'</span>category_id<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">23</span>,</span>
+<span class="pl-s1">);</span>
+<span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">Advert_model</span><span class="pl-k">-&gt;</span>save(<span class="pl-smi">$data</span>);</span></pre></div>
+
+<h2>
+<a id="update-record" class="anchor" href="#update-record" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update record</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"><span class="pl-smi">$id_record</span> <span class="pl-k">=</span> <span class="pl-c1">10</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$data</span> <span class="pl-k">=</span> <span class="pl-c1">array</span>(</span>
+<span class="pl-s1">  <span class="pl-s"><span class="pl-pds">'</span>title<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>Update Advertisement<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">  <span class="pl-s"><span class="pl-pds">'</span>description<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>Update Advertisement<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">  <span class="pl-s"><span class="pl-pds">'</span>deleted<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">0</span>,</span>
+<span class="pl-s1">  <span class="pl-s"><span class="pl-pds">'</span>category_id<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">23</span>,</span>
+<span class="pl-s1">);</span>
+<span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">Advert_model</span><span class="pl-k">-&gt;</span>save(<span class="pl-smi">$data</span>, <span class="pl-smi">$id_record</span>);</span></pre></div>
+
+<h2>
+<a id="delete-record" class="anchor" href="#delete-record" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete record</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"><span class="pl-smi">$id_record</span> <span class="pl-k">=</span> <span class="pl-c1">10</span>;</span>
+<span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">Advert_model</span><span class="pl-k">-&gt;</span>delete(<span class="pl-smi">$id_record</span>);</span></pre></div>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
