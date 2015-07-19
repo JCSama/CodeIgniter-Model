@@ -66,7 +66,7 @@ NOTES :
 After that, you can call the Model within your controller for instance like following :
 
 ```php
-// Return all records
+// Fetch all records
 $this->load->model('New_model');
 $records = $this->New_model->get_all();
 var_dump($records);
@@ -74,7 +74,7 @@ var_dump($records);
 // Return record with id=10
 $record = $this->New_model->get(10);
 var_dump($record);
-``
+```
 
 ## Fetch records with criteria
 ```php
