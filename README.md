@@ -30,8 +30,9 @@ protected $fields = array(
 Assuming that we have 2 tables advertisement and category, each advertisement belongs to a category, so a category can have
 one or many advertisements, which means our tables may look like this :
 
-NOTE : The category table has multilang fields so we're gonna put them in category_lang table
-NOTE : {table}_lang must respect the recommended structure
+NOTES :
+  - The category table has multilang fields so we're gonna put them in category_lang table
+  - {table}_lang must respect the recommended structure
 
  -----------------------
 | category              |
@@ -73,7 +74,7 @@ var_dump($records);
 // Return record with id=10
 $record = $this->New_model->get(10);
 var_dump($record);
-```
+``
 
 ## Fetch records with criteria
 ```php
