@@ -1,7 +1,12 @@
 # CodeIgniter Model Class
 
-CodeIgniter Model is an extended class for CI_Model, it allows you to manipulate CRUD operations in an easy way.
-It support multilang and relations between tables.
+CodeIgniter Model is an extended class for CI_Model, it will help you to :
+
+- CRUD operations.
+- Auto-save for multilang tables.
+- Fetch data using associations like oneToMany, ManyToOne
+- Apply filters to results
+- Pagination...
 
 # Installation
 
