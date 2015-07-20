@@ -180,12 +180,36 @@ class MY_Model extends CI_Model
     }
 
     /**
+     * Check if a record exists
+     *
+     * @param $key $field name
+     * @param $value $field value
+     * @param array conditions to exclude
+     *
+     * @return bool
+     */
+    public function exists($key, $value, $exclude = array())
+    {
+        if (count($exclude)) {
+            foreach ($exclude as $condition => $val) {
+                $this->db->where($condition . ' !=', $val);
+            }
+        }
+
+
+        $result = $this->db->where($key, $value)->get($this->table);
+
+        return (bool) $result->num_rows();
+    }
+
+    /**
      * @param $column
      * @param $order
      *
      * @return $this
      */
-    public function order_by($column, $order){
+    public function order_by($column, $order)
+    {
         $this->db->order_by($column, $order);
 
         return $this;
@@ -197,7 +221,8 @@ class MY_Model extends CI_Model
      *
      * @return $this
      */
-    public function limit($limit, $offset){
+    public function limit($limit, $offset)
+    {
         $this->db->limit($limit, $offset);
 
         return $this;
@@ -352,6 +377,7 @@ class MY_Model extends CI_Model
 
     /**
      * Fetch object relations when it's OneToMany relation
+     *
      * @param $result
      *
      * @return mixed
@@ -491,11 +517,11 @@ class MY_Model extends CI_Model
     public function add(&$object)
     {
         /* Automatically fill dates */
-        if(!empty($this->created_at)){
+        if (!empty($this->created_at)) {
             $this->db->set(array($this->created_at => date('Y-m-d H:i:s')));
         }
 
-        if(!empty($this->updated_at)){
+        if (!empty($this->updated_at)) {
             $this->db->set(array($this->updated_at => date('Y-m-d H:i:s')));
         }
 
@@ -523,7 +549,7 @@ class MY_Model extends CI_Model
     public function update($object, $id)
     {
         /* Automatically fill dates */
-        if(!empty($this->updated_at)){
+        if (!empty($this->updated_at)) {
             $this->db->set(array($this->updated_at => date('Y-m-d H:i:s')));
         }
 
@@ -544,12 +570,13 @@ class MY_Model extends CI_Model
      * Delete record by ID
      *
      * @param int $id
-     * @param bool|false $deleted in set to TRUE, the table must have a deleted column so it can be updated, it will be no physical delete.
+     * @param bool|false $deleted in set to TRUE, the table must have a deleted column so it can be updated, it will be
+     *                            no physical delete.
      *
      * @return bool
      * @throws Exception
      */
-    public function delete($id, $deleted = FALSE)
+    public function delete($id, $deleted = false)
     {
         if (!is_numeric($id))
             return false;

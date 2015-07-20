@@ -171,3 +171,15 @@ $this->Advert_model->save($data, $id_record);
 $id_record = 10;
 $this->Advert_model->delete($id_record);
 ```
+
+## Check if a record exists
+```php
+$exists = $this->Advert_model->exists('id_advert', 10);
+
+// $exists = true : if the record exists, and false if not
+
+// Check if an email address exists but the user id must NOT be mine 
+$exclude_condition = array('id_user' => $this->logged_user->get_id());
+$exists = $this->User_model->exists('email', 'example@email.com', $exclude_condition);
+
+```
