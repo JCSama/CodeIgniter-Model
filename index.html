@@ -35,7 +35,8 @@
           <p>CodeIgniter Model is an extended class for CI_Model, it allows you to manipulate CRUD operations in an easy way. It support multilang and relations between tables.</p>
           <hr>
           <span class="credits left">Project maintained by <a href="https://github.com/JCSama">JCSama</a></span>
-          </div>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
 
         <h1>
 <a id="codeigniter-model-class" class="anchor" href="#codeigniter-model-class" aria-hidden="true"><span class="octicon octicon-link"></span></a>CodeIgniter Model Class</h1>
@@ -277,6 +278,18 @@ one or many advertisements, which means our tables may look like this :</p>
 
 <div class="highlight highlight-php"><pre><span class="pl-s1"><span class="pl-smi">$id_record</span> <span class="pl-k">=</span> <span class="pl-c1">10</span>;</span>
 <span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">Advert_model</span><span class="pl-k">-&gt;</span>delete(<span class="pl-smi">$id_record</span>);</span></pre></div>
+
+<h2>
+<a id="check-if-a-record-exists" class="anchor" href="#check-if-a-record-exists" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check if a record exists</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-s1"><span class="pl-smi">$exists</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">Advert_model</span><span class="pl-k">-&gt;</span>exists(<span class="pl-s"><span class="pl-pds">'</span>id_advert<span class="pl-pds">'</span></span>, <span class="pl-c1">10</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// $exists = true : if the record exists, and false if not</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Check if an email address exists but the user id must NOT be mine </span></span>
+<span class="pl-s1"><span class="pl-smi">$exclude_condition</span> <span class="pl-k">=</span> <span class="pl-c1">array</span>(<span class="pl-s"><span class="pl-pds">'</span>id_user<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">logged_user</span><span class="pl-k">-&gt;</span>get_id());</span>
+<span class="pl-s1"><span class="pl-smi">$exists</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">User_model</span><span class="pl-k">-&gt;</span>exists(<span class="pl-s"><span class="pl-pds">'</span>email<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>example@email.com<span class="pl-pds">'</span></span>, <span class="pl-smi">$exclude_condition</span>);</span>
+<span class="pl-s1"></span></pre></div>
       </section>
 
     </div>
